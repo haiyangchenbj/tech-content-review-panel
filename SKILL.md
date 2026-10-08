@@ -1,7 +1,7 @@
 ---
 name: tech-content-review-panel
 description: Reviews a tech/AI/industry research or in-depth analysis long-form article before publishing, via a fixed eight-role expert panel (target-reader reps, quality gatekeepers incl. fact+originality check, distribution gatekeeper) in an evaluate-then-optimize loop. Applies to tech/AI/data deep-dives, sector judgment and research pieces — not news, marketing, docs, tutorials, or short opinion posts. Trigger when the user asks to 会审/评审/review a finished deep-analysis draft or wants tech content 接近完美/可发布.
-version: 1.2.0
+version: "1.2.1"
 agent_created: true
 read_when:
   - "会审 / 评审 / review this article"
@@ -41,7 +41,8 @@ A tech/AI/industry deep-analysis piece aimed at an industry readership and built
 ### Step 3 [Deterministic] G2 Style red-line scan (reject if not cleared)
 - Grep the full text for red-line phrasing (aligned with the user's long-term writing profile `negative_rules`):
   - Contrast structures are no longer an absolute zero-tolerance gate. Allow natural, low-density contrast at judgment points (roughly <=3 occurrences per 6,500 Chinese characters), but reject formulaic repetition, contrast used as filler, and any sentence with an AI-bridge pattern. If a contrast sentence can be stated more directly without losing meaning, prefer the direct version. Never replace one contrast pattern with another during revision.
-  - For English, screen `not X but Y`, `rather than`, `instead of`, and similar forms for density and rhetorical function; do not mechanically delete natural comparative language.
+  - For English, screen `not X but Y`, `rather than`, `instead of`, and similar forms for density and rhetorical function; do not mechanically delete natural comparative language. Also screen translated-syntax English (Chinese-to-English calques: nominalized predicate chains, stacked passives, literal idiom translations, sentence rhythm that reads like a translation rather than originally-written English). The author is not a reliable judge of EN native-ness — this check must happen in review, never left to author self-assessment.
+  - Register scan for Chinese (2026-09-16 calibration, mirrors tech-writing-pipeline section 4 register discipline): reject colloquial scenario/dialogue sentences ("没人帮我们画" / "你的下一个同事" — first/second-person conversational staging; subject should be enterprise/org/buyer), reject English-calque nominal predicates ("组织问题没有供应商" = "X has no vendor" translated literally; rewrite as full subject-predicate clause, e.g. "没有供应商能替买方回答组织问题"), reject entertaining hooks and playful endings. Approved baseline: full subject-predicate + abstract verb (翻译/到来/回答) + precise qualification; short sentences allowed, colloquial words not. Rule applies to titles, section headers, and bolded key lines, not just body text.
   - marketing jargon (empower / closed-loop / end-to-end / powerful / significant / substantial / build)
   - self-aggrandizing / inspirational-influencer tone
   - preacher / instructing tone (you should… / I suggest you… / here's what to do)
@@ -63,6 +64,7 @@ A tech/AI/industry deep-analysis piece aimed at an industry readership and built
 ### Step 6 [LLM] T1 Distribution assessment
 - **T1 Tech media editor**: understands platform distribution. Rates title hook (has a hook without losing professionalism), opening retention and search-crawlability, screenshot-shareable memorable points, multi-platform fit (WeChat / LinkedIn / Substack each have their own logic).
 - Surface the tension with G2 / R4 (hook vs restraint) explicitly; do not force unification.
+- **Mandatory native-speaker language pass (2026-09-16 calibration, not optional)**: after the distribution assessment, re-read the full draft as a native speaker of the writing language (Chinese draft → native Chinese reader; English draft → native English reader). Flag every word, collocation, sentence rhythm, or metaphor that reads translated, calqued, or unnatural; run the pipeline's calque lexicon and back-translation test here as a review-stage filter. Findings route to **must-fix**, never optional — this pass exists because the author is not a reliable judge of native-ness (EN native-ness is an author blind spot; EN→ZH calques are author zero-tolerance but still slip through). Language verdict reported separately from distribution verdict.
 
 ### Step 7 [LLM] Consolidate and revise
 - Grade feedback: must-fix / suggested / optional / for-author-decision (tension items).
@@ -163,6 +165,7 @@ Finalize only after the selected reader-fit test passes its positioning-drift ch
 6. **Reader-fit feedback cannot override the positioning lock** — the reading test diagnoses misunderstanding; it does not grant every role editorial authority to expand scope, change genre, add unsupported material or flatten technical depth.
 7. **Do not average roles or chase unanimity** — fix factual/technical misreadings even if one role reports them; adopt comprehension fixes only when compatible with the intended reading task; park preference conflicts explicitly.
 8. **Scope and length are quality constraints** — do not add examples, tables, definitions or sections merely because a reader requested them. Every addition must repair a named comprehension barrier without creating a new center of gravity.
+9. **Native-speaker review is a mandatory gate** — T1 must re-read the draft as a native speaker of the writing language and flag translated / calqued / unidiomatic expression; such findings are must-fix. Writing-time discipline (pipeline section 4 register rules) and review-time filtering are two independent defenses, never merged or skipped together.
 
 ## Pitfalls
 
@@ -207,4 +210,6 @@ Role profiles can be fine-tuned per the specific project's reader composition an
 - **流程**：八角色会审负责事实、原创、红线、结构、专业度和传播张力；会审修订后另跑一次 **reader-fit 阅读测试**，再定稿。阅读测试先锁文章定位，按文章需要选择 3–4 个代表角色，不默认全选。
 - **阅读测试硬规则**：只诊断核心信息是否被正确理解、范围是否被误读和必要桥梁是否缺失；不把所有角色意见一概采用，不为迎合读者改题、扩篇、降技术密度或加入未经研究支撑的内容。
 - **硬规则**：评审挑得狠不自我表扬；G1 优先级最高；红线清零是硬门槛（Step3/Step8 双 grep）；专业 vs 传播张力不强行统一，列选项由作者拍板。
+- **母语审核强制门（2026-09-16 科里增设）**：T1 编辑角色须以写作语言的母语使用者视角重读全文，过滤翻译腔与不地道表达，命中即 must-fix；与写作阶段语域纪律构成两道独立防线。
+- **标题锚点门（2026-10-08 增设）**：T1 编辑角色须单独核标题——必须含具体锚点（谁/场景/问题三类至少一类），抽象短标题、文件名式标题、读者导向空泛标题（如"关于 X 的思考"）命中即 must-fix；标题是分发第一入口，不随正文修订自动改善，须单独过一遍。
 - 角色画像可按项目读者构成与写作规范微调；详细定义见 `references/depth-playbook.md`。
