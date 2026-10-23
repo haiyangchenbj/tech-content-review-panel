@@ -1,7 +1,7 @@
 ---
 name: tech-content-review-panel
 description: Reviews a tech/AI/industry research or in-depth analysis long-form article before publishing, via a fixed eight-role expert panel (target-reader reps, quality gatekeepers incl. fact+originality check, distribution gatekeeper) in an evaluate-then-optimize loop. Applies to tech/AI/data deep-dives, sector judgment and research pieces — not news, marketing, docs, tutorials, or short opinion posts. Trigger when the user asks to 会审/评审/review a finished deep-analysis draft or wants tech content 接近完美/可发布.
-version: "1.2.1"
+version: "1.2.2"
 agent_created: true
 read_when:
   - "会审 / 评审 / review this article"
@@ -71,7 +71,7 @@ A tech/AI/industry deep-analysis piece aimed at an industry readership and built
 - Handle all must-fix and suggested; list options for tension items for the author to decide.
 
 ### Step 8 [Deterministic] Re-check
-- After revision, re-run Step 2 and Step 3 (facts and red-lines must not introduce new problems from the changes; re-grep red-lines to confirm cleared).
+- After revision, re-run Step 2 and Step 3 (facts and red-lines must not introduce new problems from the changes; re-grep red-lines to confirm cleared). If Step 6's native-speaker pass flagged must-fix items, re-read the revised passages the same way to confirm they are cleared.
 
 ### Step R [LLM] Post-draft reader-fit test (separate from the eight-role panel)
 
@@ -210,6 +210,6 @@ Role profiles can be fine-tuned per the specific project's reader composition an
 - **流程**：八角色会审负责事实、原创、红线、结构、专业度和传播张力；会审修订后另跑一次 **reader-fit 阅读测试**，再定稿。阅读测试先锁文章定位，按文章需要选择 3–4 个代表角色，不默认全选。
 - **阅读测试硬规则**：只诊断核心信息是否被正确理解、范围是否被误读和必要桥梁是否缺失；不把所有角色意见一概采用，不为迎合读者改题、扩篇、降技术密度或加入未经研究支撑的内容。
 - **硬规则**：评审挑得狠不自我表扬；G1 优先级最高；红线清零是硬门槛（Step3/Step8 双 grep）；专业 vs 传播张力不强行统一，列选项由作者拍板。
-- **母语审核强制门（2026-09-16 科里增设）**：T1 编辑角色须以写作语言的母语使用者视角重读全文，过滤翻译腔与不地道表达，命中即 must-fix；与写作阶段语域纪律构成两道独立防线。
+- **母语审核强制门（2026-09-16 增设）**：T1 编辑角色须以写作语言的母语使用者视角重读全文，过滤翻译腔与不地道表达，命中即 must-fix；与写作阶段语域纪律构成两道独立防线。
 - **标题锚点门（2026-10-08 增设）**：T1 编辑角色须单独核标题——必须含具体锚点（谁/场景/问题三类至少一类），抽象短标题、文件名式标题、读者导向空泛标题（如"关于 X 的思考"）命中即 must-fix；标题是分发第一入口，不随正文修订自动改善，须单独过一遍。
 - 角色画像可按项目读者构成与写作规范微调；详细定义见 `references/depth-playbook.md`。
