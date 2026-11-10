@@ -1,7 +1,7 @@
 ---
 name: tech-content-review-panel
 description: Reviews a tech/AI/industry research or in-depth analysis long-form article before publishing, via a fixed eight-role expert panel (target-reader reps, quality gatekeepers incl. fact+originality check, distribution gatekeeper) in an evaluate-then-optimize loop. Applies to tech/AI/data deep-dives, sector judgment and research pieces — not news, marketing, docs, tutorials, or short opinion posts. Trigger when the user asks to 会审/评审/review a finished deep-analysis draft or wants tech content 接近完美/可发布.
-version: "1.2.2"
+version: "1.2.3"
 agent_created: true
 read_when:
   - "会审 / 评审 / review this article"
@@ -195,6 +195,7 @@ Finalize only after the selected reader-fit test passes its positioning-drift ch
 【R2】【R3】【R4】same as above
 【G3 Depth】how many moves hit + what's missing
 【T1 Distribution】title hook + opening retention + memorable point + platform fit + tension with G2/R4
+【T1 Language】native-speaker pass verdict (must-fix items flagged and cleared on Step 8 re-read), reported separately from distribution
 【Summary】must-fix N / suggested N / optional N / for-decision N
 ```
 
