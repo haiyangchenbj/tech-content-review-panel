@@ -1,6 +1,6 @@
 ## Description:
 
-Reviews finished tech, AI, and industry deep-analysis articles through an eight-role panel covering facts, originality, style, depth, reader value, and distribution readiness.
+Reviews finished technology, AI, and industry research or in-depth articles through an eight-role expert panel in an evaluate-then-optimize loop.
 
 This skill is ready for commercial/non-commercial use.
 
@@ -14,7 +14,7 @@ MIT-0
 
 ## Use Case:
 
-Writers and editors use this skill to assess a finished long-form tech or AI analysis for publication, identify must-fix issues, and check whether revisions preserve the intended audience and scope. It is not intended for news, marketing, documentation, tutorials, or unfinished drafts.
+Writers and reviewers of technology, AI, or industry long-form research can use the panel to assess a finished draft for factual grounding, originality, style, technical depth, reader fit, and distribution. It is not intended for news, marketing copy, product documentation, tutorials, short opinion pieces, or drafts that are not yet complete.
 
 ### Deployment Geography for Use:
 
@@ -22,32 +22,33 @@ Global
 
 ## Known Risks and Mitigations:
 
-Risk: Web checks of draft content may disclose unpublished ideas or sensitive material to external search services.
+Risk: Search queries based on unpublished article wording may expose confidential material to a search provider.
 
-Mitigation: Obtain permission before searching unpublished text, and avoid sending confidential passages or distinctive phrasing to external services.
+Mitigation: Use wording approved for external search, or review and approve search queries before sending them.
 
-Risk: Strict editorial preferences or incomplete fact and originality searches may lead to misleading publication-readiness judgments.
+Risk: Applying review suggestions as edits may change a draft beyond the author's intent or make it harder to recover the original.
 
-Mitigation: Have the author review cited evidence, unresolved claims, and proposed style changes before publishing.
+Mitigation: Specify whether the review should provide recommendations only or make authorized edits, and keep a copy before revisions.
 
 ## Reference(s):
 
-- [Tech Content Review Panel on ClawHub](https://clawhub.ai/haiyangchenbj/skills/tech-content-review-panel)
-- [Depth playbook](references/depth-playbook.md)
+- [ClawHub skill release](https://clawhub.ai/haiyangchenbj/skills/tech-content-review-panel)
+- [Publisher profile](https://clawhub.ai/user/haiyangchenbj)
+- [Professional Depth Playbook](references/depth-playbook.md)
 
 ## Skill Output:
 
-**Output Type(s):** [Analysis, Guidance]
+**Output Type(s):** [Analysis, Markdown, Guidance]
 
-**Output Format:** [Markdown review with per-role findings and prioritized editorial recommendations]
+**Output Format:** [Structured review findings with prioritized feedback and revision recommendations]
 
 **Output Parameters:** [1D]
 
-**Other Properties Related to Output:** [Includes fact and originality checks, style and depth assessments, distribution feedback, and a separate reader-fit test.]
+**Other Properties Related to Output:** [Recommendations are advisory; retain the draft's positioning, scope, and technical depth.]
 
 ## Skill Version(s):
 
-1.2.1 (source: frontmatter and server release)
+1.2.2 (source: server-resolved release)
 
 ## Ethical Considerations:
 
